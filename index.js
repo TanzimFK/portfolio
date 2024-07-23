@@ -10,7 +10,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 // API routes
 app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Hello from the server!' });
+  res.json({ message: 'Hello from vercel!' });
 });
 
 // Handles any requests that don't match the ones above
