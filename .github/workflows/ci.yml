@@ -1,10 +1,10 @@
-name: CI
+name: Deploy to Vercel
 
 on:
   push:
-    branches: [main]
+    branches: [vercel]
   pull_request:
-    branches: [main]
+    branches: [vercel]
 
 jobs:
   deploy:
@@ -24,18 +24,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Deploy to Heroku
+      - name: Deploy to Vercel
         env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
-          # Authenticate to Heroku
-          echo $HEROKU_API_KEY | heroku auth:token
-          
-          # Verify authentication
-          heroku auth:whoami
-          
-          # Add Heroku remote
-          git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/tanzimcode-dev.git
-          
-          # Push to Heroku
-          git push heroku main
+          npx vercel --token=$VERCEL_TOKEN
